@@ -116,14 +116,8 @@
     <repositories>
         <repository>
             <id>github</id>
-            <url>https://maven.pkg.github.com/tnd4698/common-libs</url>
+            <url>https://maven.pkg.github.com/tnd4698/repo</url>
         </repository>
     </repositories>
 
-<!--    <distributionManagement>-->
-<!--        <repository>-->
-<!--            <id>github</id>-->
-<!--            <url>https://maven.pkg.github.com/tnd4698/dbservice</url>-->
-<!--        </repository>-->
-<!--    </distributionManagement>-->
 </project>
