@@ -114,6 +114,14 @@
         </plugins>
     </build>
 
+    <repositories>
+        <repository>
+            <id>com.tnd.common.api.server</id>
+            <name>server</name>
+            <url>file:/home/tnd/Privates/dbservice/repo/com/tnd/common/api/server/1.0.1/server-1.0.1.pom</url>
+        </repository>
+    </repositories>
+
 <!--    <distributionManagement>-->
 <!--        <repository>-->
 <!--            <id>github</id>-->
