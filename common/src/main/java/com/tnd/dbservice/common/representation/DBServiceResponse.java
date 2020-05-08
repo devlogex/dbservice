@@ -1,7 +1,5 @@
 package com.tnd.dbservice.common.representation;
 
-import com.tnd.common.api.common.base.BaseResponse;
-
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
