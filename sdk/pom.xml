@@ -13,4 +13,21 @@
     <artifactId>sdk</artifactId>
     <version>1.0.0</version>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.tnd.common.api</groupId>
+            <artifactId>api-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.tnd.dbservice</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>
