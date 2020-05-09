@@ -18,7 +18,7 @@ public class SDKTest {
 
     @Before
     public void init() {
-        client = new DBServiceSdkClientImpl("localhost",9000,1);
+        client = new DBServiceSdkClientImpl("localhost", 9000,1);
     }
 
     @Test

@@ -26,7 +26,8 @@ public class DBServiceHandler implements BaseHandler {
     @Autowired
     private DataSourceConfig dataSourceConfig;
 
-    @HandlerService(method = Methods.SELECT_SQL)
+    @HandlerService(method = Methods.SELECT_SQL, path = "/select", protocol = "GET",
+            dataRequestType = "com.tnd.dbservice.common.representation.DBServiceRequest")
     public BaseResponse<DBServiceResponse.QueryResult> selectSQL(BaseRequest<DBServiceRequest> request) throws SQLException {
         LOGGER.info("Receive request selectSQL: {}", gson.toJson(request));
         DBServiceResponse.QueryResult response = new DBServiceResponse.QueryResult();
@@ -42,7 +43,8 @@ public class DBServiceHandler implements BaseHandler {
         }
     }
 
-    @HandlerService(method = Methods.EXECUTE_SQL)
+    @HandlerService(method = Methods.EXECUTE_SQL, path = "/execute", protocol = "GET",
+            dataRequestType = "com.tnd.dbservice.common.representation.DBServiceRequest")
     public BaseResponse<Boolean> executeSQL(BaseRequest<DBServiceRequest> request) throws SQLException {
         LOGGER.info("Receive request executeSQL: {}", gson.toJson(request));
         try {

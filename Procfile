@@ -1,1 +1,1 @@
-web: java -cp target/dbservice-jar-with-dependencies.jar com.tnd.dbservice.runner.DBServiceRunner
+web: java -cp runner/target/dbservice-runner-jar-with-dependencies.jar com.tnd.dbservice.runner.DBServiceRunner

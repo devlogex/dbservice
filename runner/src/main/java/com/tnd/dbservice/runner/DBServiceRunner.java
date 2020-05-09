@@ -18,10 +18,10 @@ public class DBServiceRunner {
 
         String port = System.getenv("PORT");
         if(port == null) {
-            commonServer.initGrpc(9000);
+            commonServer.initServlet(9000);
         }
         else {
-            commonServer.initGrpc(Integer.parseInt(port));
+            commonServer.initServlet(Integer.parseInt(port));
         }
         commonServer.startServer();
     }
