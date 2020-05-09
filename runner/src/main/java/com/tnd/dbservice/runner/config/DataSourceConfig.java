@@ -1,5 +1,7 @@
 package com.tnd.dbservice.runner.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 
@@ -10,6 +12,7 @@ import java.util.List;
 import java.util.Properties;
 
 public class DataSourceConfig {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DataSourceConfig.class);
     private String url;
     private String username;
     private String password;
@@ -37,6 +40,7 @@ public class DataSourceConfig {
     private Connection connection;
 
     public List<HashMap<String, String>> selectSQL(String query) throws SQLException {
+        LOGGER.info("Start selectSQL : {}, DB_CONNECTION: {}", query, url);
         List<HashMap<String, String>> result = new ArrayList<>();
         connection = DriverManager.getConnection(url,properties);
         Statement statement = connection.createStatement();
@@ -54,6 +58,7 @@ public class DataSourceConfig {
     }
 
     public void executeSQL(String query) throws SQLException {
+        LOGGER.info("Start executeSQL : {}, DB_CONNECTION: {}", query, url);
         connection = DriverManager.getConnection(url,properties);
         Statement statement = connection.createStatement();
         statement.executeUpdate(query);
