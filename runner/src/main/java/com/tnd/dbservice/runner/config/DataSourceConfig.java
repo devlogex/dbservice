@@ -13,28 +13,28 @@ import java.util.Properties;
 
 public class DataSourceConfig {
     private static final Logger LOGGER = LoggerFactory.getLogger(DataSourceConfig.class);
-    private String url;
-    private String username;
-    private String password;
+    private static String url = "jdbc:postgresql://ec2-34-193-117-204.compute-1.amazonaws.com:5432/d47t25l90ev62k";
+    private static String username = "abvjkjdvtydjjz";
+    private static String password = "f7d1a1819d3c3c80915aa617ae92ab8eae025e871b7d0fe4fbfa1c0c0027d707";
     private String host;
     private String port;
     private String database;
     private Properties properties;
 
     public DataSourceConfig(String url, String username, String password, String host, String port, String database ) {
-        this.url = url;
-        this.username = username;
-        this.password = password;
-        this.host = host;
-        this.port = port;
-        this.database = database;
-
-        properties = new Properties();
-        properties.setProperty("user", username);
-        properties.setProperty("password", password);
-        properties.setProperty("host", host);
-        properties.setProperty("port", port);
-        properties.setProperty("database", database);
+//        this.url = url;
+//        this.username = username;
+//        this.password = password;
+//        this.host = host;
+//        this.port = port;
+//        this.database = database;
+//
+//        properties = new Properties();
+//        properties.setProperty("user", username);
+//        properties.setProperty("password", password);
+//        properties.setProperty("host", host);
+//        properties.setProperty("port", port);
+//        properties.setProperty("database", database);
     }
 
     private Connection connection;
