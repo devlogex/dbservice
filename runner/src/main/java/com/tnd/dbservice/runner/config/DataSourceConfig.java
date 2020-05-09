@@ -42,7 +42,7 @@ public class DataSourceConfig {
     public List<HashMap<String, String>> selectSQL(String query) throws SQLException {
         LOGGER.info("Start selectSQL : {}, DB_CONNECTION: {}", query, url);
         List<HashMap<String, String>> result = new ArrayList<>();
-        connection = DriverManager.getConnection(url,properties);
+        connection = DriverManager.getConnection(url, username, password);
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(query);
         while(resultSet.next()) {
@@ -59,7 +59,7 @@ public class DataSourceConfig {
 
     public void executeSQL(String query) throws SQLException {
         LOGGER.info("Start executeSQL : {}, DB_CONNECTION: {}", query, url);
-        connection = DriverManager.getConnection(url,properties);
+        connection = DriverManager.getConnection(url, username, password);
         Statement statement = connection.createStatement();
         statement.executeUpdate(query);
         connection.close();
