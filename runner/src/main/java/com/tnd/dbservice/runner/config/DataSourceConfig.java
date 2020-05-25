@@ -13,9 +13,9 @@ import java.util.Properties;
 
 public class DataSourceConfig {
     private static final Logger LOGGER = LoggerFactory.getLogger(DataSourceConfig.class);
-    private static String url = "jdbc:postgresql://ec2-34-193-117-204.compute-1.amazonaws.com:5432/d47t25l90ev62k";
-    private static String username = "abvjkjdvtydjjz";
-    private static String password = "f7d1a1819d3c3c80915aa617ae92ab8eae025e871b7d0fe4fbfa1c0c0027d707";
+    private static String url = "jdbc:postgresql://ec2-34-230-231-71.compute-1.amazonaws.com:5432/dcbibdkk5ajgpc";
+    private static String username = "jnibiqxvvluloc";
+    private static String password = "dd36ba180eac63bc23d559675b6dd46e7109a3c70703a70cbad8c9efdc188805";
     private String host;
     private String port;
     private String database;

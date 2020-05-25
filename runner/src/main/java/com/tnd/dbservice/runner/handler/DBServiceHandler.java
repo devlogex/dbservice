@@ -52,7 +52,7 @@ public class DBServiceHandler implements BaseHandler {
             LOGGER.info("Success request: {}", gson.toJson(request));
             return new BaseResponse<>(true);
         } catch (SQLException e) {
-            LOGGER.error("Failed request selectSQL: {}", gson.toJson(request));
+            LOGGER.error("Failed request executeSQL: {}", gson.toJson(request));
             throw e;
         }
     }
