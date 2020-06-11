@@ -43,7 +43,7 @@ public class DBServiceHandler implements BaseHandler {
         }
     }
 
-    @HandlerService(method = Methods.EXECUTE_SQL, path = "/execute", protocol = "GET",
+    @HandlerService(method = Methods.EXECUTE_SQL, path = "/execute", protocol = "POST",
             dataRequestType = "com.tnd.dbservice.common.representation.DBServiceRequest")
     public BaseResponse<Boolean> executeSQL(BaseRequest<DBServiceRequest> request) throws SQLException {
         LOGGER.info("Receive request executeSQL: {}", gson.toJson(request));
