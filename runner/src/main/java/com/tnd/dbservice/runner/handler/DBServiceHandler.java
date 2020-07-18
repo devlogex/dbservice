@@ -26,13 +26,12 @@ public class DBServiceHandler implements BaseHandler {
     @Autowired
     private DataSourceConfig dataSourceConfig;
 
-    @HandlerService(method = Methods.SELECT_SQL, path = "/select", protocol = "GET",
-            dataRequestType = "com.tnd.dbservice.common.representation.DBServiceRequest")
-    public BaseResponse<DBServiceResponse.QueryResult> selectSQL(BaseRequest<DBServiceRequest> request) throws SQLException {
+    @HandlerService(method = Methods.SELECT_SQL, path = "/select", protocol = "GET")
+    public BaseResponse<DBServiceResponse.QueryResult> selectSQL(DBServiceRequest request) throws SQLException {
         LOGGER.info("Receive request selectSQL: {}", gson.toJson(request));
         DBServiceResponse.QueryResult response = new DBServiceResponse.QueryResult();
         try {
-            List<HashMap<String, String>> data = dataSourceConfig.selectSQL(request.getData().getQuery());
+            List<HashMap<String, String>> data = dataSourceConfig.selectSQL(request.getQuery());
             response.setData(data);
             response.setSuccess(true);
             LOGGER.info("Success request, response: {}", gson.toJson(response));
@@ -43,12 +42,11 @@ public class DBServiceHandler implements BaseHandler {
         }
     }
 
-    @HandlerService(method = Methods.EXECUTE_SQL, path = "/execute", protocol = "POST",
-            dataRequestType = "com.tnd.dbservice.common.representation.DBServiceRequest")
-    public BaseResponse<Boolean> executeSQL(BaseRequest<DBServiceRequest> request) throws SQLException {
+    @HandlerService(method = Methods.EXECUTE_SQL, path = "/execute", protocol = "POST")
+    public BaseResponse<Boolean> executeSQL(DBServiceRequest request) throws SQLException {
         LOGGER.info("Receive request executeSQL: {}", gson.toJson(request));
         try {
-            dataSourceConfig.executeSQL(request.getData().getQuery());
+            dataSourceConfig.executeSQL(request.getQuery());
             LOGGER.info("Success request: {}", gson.toJson(request));
             return new BaseResponse<>(true);
         } catch (SQLException e) {

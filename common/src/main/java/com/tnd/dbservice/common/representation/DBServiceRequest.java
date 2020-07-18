@@ -1,8 +1,10 @@
 package com.tnd.dbservice.common.representation;
 
+import com.tnd.common.api.common.base.BaseRequest;
+
 import java.io.Serializable;
 
-public class DBServiceRequest implements Serializable {
+public class DBServiceRequest extends BaseRequest {
     private static final long serialVersionUID = 1L;
 
     private String query;
