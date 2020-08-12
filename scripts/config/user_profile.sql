@@ -1,8 +1,9 @@
 CREATE TABLE "user_profile" (
   "id" bigint PRIMARY KEY,
   "email" varchar(256) NOT NULL UNIQUE,
-  "password" varchar(256) NOT NULL,
-  "role" int NOT NULL,
+  "password" varchar(256),
+  "role" varchar(256) NOT NULL,
+  "avatar" text,
   "first_name" varchar(256) NOT NULL,
   "last_name" varchar(256) NOT NULL,
   "company_name" varchar(256),

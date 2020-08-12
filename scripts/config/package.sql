@@ -4,6 +4,8 @@ CREATE TABLE "package" (
   "max_member" int NOT NULL,
   "price" NUMERIC(19,4) NOT NULL,
   "period_validity" bigint NOT NULL,
+  "name" VARCHAR(256),
+  "description" text,
   "created_at" bigint,
   "created_by" bigint,
   "updated_at" bigint,
