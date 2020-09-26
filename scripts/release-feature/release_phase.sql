@@ -4,7 +4,7 @@ CREATE TABLE "release_phase" (
   "name" varchar(256) NOT NULL,
   "type" integer NOT NULL,
   "color" varchar(8),
-  "date" varchar(64) NOT NULL,
+  "date" varchar(64),
   "description" text,
   "files" text
 );

@@ -5,7 +5,7 @@ CREATE TABLE "feature" (
   "state" integer NOT NULL,
   "release_id" bigint NOT NULL,
   "type" integer NOT NULL,
-  "assign_to" bigint NOT NULL,
+  "assign_to" bigint,
   "initiative_id" bigint,
   "goals" text,
   "epic_id" bigint,
