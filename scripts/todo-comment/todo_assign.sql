@@ -4,5 +4,6 @@ CREATE TABLE "todo_assign" (
   "user_id" bigint NOT NULL,
   "workspace_id" bigint NOT NULL,
   "type" integer NOT NULL,
-  "state" integer NOT NULL
+  "state" integer NOT NULL,
+  "verified_at" bigint
 );

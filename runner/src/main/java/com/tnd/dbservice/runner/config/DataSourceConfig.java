@@ -13,36 +13,17 @@ import java.util.Properties;
 
 public class DataSourceConfig {
     private static final Logger LOGGER = LoggerFactory.getLogger(DataSourceConfig.class);
-    private static String url = "jdbc:postgresql://ec2-34-230-231-71.compute-1.amazonaws.com:5432/dcbibdkk5ajgpc";
-    private static String username = "jnibiqxvvluloc";
-    private static String password = "dd36ba180eac63bc23d559675b6dd46e7109a3c70703a70cbad8c9efdc188805";
-    private String host;
-    private String port;
-    private String database;
-    private Properties properties;
-
-    public DataSourceConfig(String url, String username, String password, String host, String port, String database ) {
-//        this.url = url;
-//        this.username = username;
-//        this.password = password;
-//        this.host = host;
-//        this.port = port;
-//        this.database = database;
-//
-//        properties = new Properties();
-//        properties.setProperty("user", username);
-//        properties.setProperty("password", password);
-//        properties.setProperty("host", host);
-//        properties.setProperty("port", port);
-//        properties.setProperty("database", database);
-    }
 
     private Connection connection;
 
-    public List<HashMap<String, String>> selectSQL(String query) throws SQLException {
-        LOGGER.info("Start selectSQL : {}, DB_CONNECTION: {}", query, url);
-        List<HashMap<String, String>> result = new ArrayList<>();
+    public DataSourceConfig(String username, String password, String host, String port, String database ) throws SQLException {
+        String url = String.format("jdbc:postgresql://%s:%s/%s", host, port, database);
         connection = DriverManager.getConnection(url, username, password);
+    }
+
+    public List<HashMap<String, String>> selectSQL(String query) throws SQLException {
+        LOGGER.info("Start selectSQL : {}, DB_CONNECTION: {}", query);
+        List<HashMap<String, String>> result = new ArrayList<>();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(query);
         while(resultSet.next()) {
@@ -53,15 +34,12 @@ public class DataSourceConfig {
             }
             result.add(mapData);
         }
-        connection.close();
         return result;
     }
 
     public void executeSQL(String query) throws SQLException {
-        LOGGER.info("Start executeSQL : {}, DB_CONNECTION: {}", query, url);
-        connection = DriverManager.getConnection(url, username, password);
+        LOGGER.info("Start executeSQL : {}, DB_CONNECTION: {}", query);
         Statement statement = connection.createStatement();
         statement.executeUpdate(query);
-        connection.close();
     }
 }
