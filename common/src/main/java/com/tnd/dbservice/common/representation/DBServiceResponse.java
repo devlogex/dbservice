@@ -11,14 +11,6 @@ public class DBServiceResponse implements Serializable {
         private static final long serialVersionUID = 1L;
         private Boolean success;
 
-        public ExecuteNonQueryResult(){
-
-        }
-
-        public ExecuteNonQueryResult(Boolean success) {
-            this.success = success;
-        }
-
         public Boolean getSuccess() {
             return success;
         }
