@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>com.tnd.common.api</groupId>
-            <artifactId>api-client</artifactId>
+            <artifactId>common</artifactId>
         </dependency>
     </dependencies>
 </project>
