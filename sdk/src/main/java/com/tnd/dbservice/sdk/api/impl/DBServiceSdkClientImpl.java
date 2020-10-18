@@ -20,8 +20,8 @@ public class DBServiceSdkClientImpl extends AbstractService implements DBService
     }
 
     @Override
-    public void executeSQL(String query) {
+    public BaseResponse<Boolean> executeSQL(String query) {
         DBServiceRequest request = new DBServiceRequest(query);
-        client.sendRequest(Methods.EXECUTE_SQL, request);
+        return client.sendRequest(Methods.EXECUTE_SQL, request);
     }
 }

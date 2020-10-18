@@ -54,4 +54,9 @@ public class DBServiceHandler implements BaseHandler {
             throw e;
         }
     }
+
+    @HandlerService(path = "/", protocol = "GET")
+    public BaseResponse<Boolean> check(BaseRequest request) {
+        return new BaseResponse<>(null);
+    }
 }

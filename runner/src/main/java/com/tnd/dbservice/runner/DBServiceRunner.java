@@ -16,13 +16,8 @@ public class DBServiceRunner {
         CommonServer commonServer = new CommonServer();
         commonServer.register(SpringApplicationContext.getBean(DBServiceHandler.class));
 
-        String port = System.getenv("PORT");
-        if(port == null) {
-            commonServer.initServlet(9000);
-        }
-        else {
-            commonServer.initServlet(Integer.parseInt(port));
-        }
+        commonServer.initGrpc(9000);
+        commonServer.initServlet(8000);
         commonServer.startServer();
     }
 }

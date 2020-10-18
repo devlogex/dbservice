@@ -8,6 +8,7 @@ CREATE TABLE "todo" (
   "files" text,
   "due_date" bigint NOT NULL,
   "state" integer NOT NULL,
+  "completed_at" bigint,
   "created_at" bigint NOT NULL,
   "created_by" bigint NOT NULL
 );
