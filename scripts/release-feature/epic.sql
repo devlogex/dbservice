@@ -5,7 +5,7 @@ CREATE TABLE "epic" (
   "state" integer NOT NULL,
   "release_id" bigint NOT NULL,
   "assign_to" bigint,
-  "initiative_id" bigint,
+  "initiatives" text,
   "goals" text,
   "description" text,
   "files" text,

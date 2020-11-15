@@ -6,5 +6,5 @@ CREATE TABLE "model" (
   "time_frame" varchar(64) NOT NULL DEFAULT '',
   "buz_type" varchar(64) NOT NULL DEFAULT 'Business',
   "description" text NOT NULL DEFAULT '',
-  "files" varchar(512) NOT NULL DEFAULT ''
+  "files" text NOT NULL DEFAULT ''
 );

@@ -5,5 +5,5 @@ CREATE TABLE "position" (
   "buz_type" varchar(64) NOT NULL DEFAULT 'Business',
   "time_frame" varchar(64) NOT NULL DEFAULT '',
   "description" text NOT NULL DEFAULT '',
-  "files" varchar(512) NOT NULL DEFAULT ''
+  "files" text NOT NULL DEFAULT ''
 );
