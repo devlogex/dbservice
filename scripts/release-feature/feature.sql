@@ -14,6 +14,8 @@ CREATE TABLE "feature" (
   "description" text,
   "files" text,
   "requirements" text,
+  "process" integer default 100,
+  "is_complete" integer default 1,
   "created_at" bigint,
   "created_by" bigint
 );

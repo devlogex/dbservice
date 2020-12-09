@@ -5,6 +5,5 @@ CREATE TABLE "history" (
   "action" VARCHAR(64),
   "object_id" bigint,
   "user_id" bigint,
-  "content" text ,
-  "type" INTEGER NOT NULL
+  "content" text
 );
