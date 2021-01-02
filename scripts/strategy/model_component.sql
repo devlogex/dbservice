@@ -3,6 +3,6 @@ CREATE TABLE "model_component" (
   "name" varchar(64) NOT NULL DEFAULT 'Name...',
   "model_id" bigint NOT NULL,
   "color" varchar(8) NOT NULL DEFAULT 'f5f6fa',
-  "description" text NOT NULL DEFAULT 'Description...',
-  "files" text NOT NULL DEFAULT ''
+  "description" text DEFAULT 'Description...',
+  "files" text DEFAULT ''
 );

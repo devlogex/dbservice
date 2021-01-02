@@ -3,6 +3,8 @@ CREATE TABLE "epic" (
   "product_id" bigint NOT NULL,
   "name" varchar(256) NOT NULL,
   "state" integer NOT NULL,
+  "start_on" bigint,
+  "end_on" bigint,
   "release_id" bigint NOT NULL,
   "assign_to" bigint,
   "initiatives" text,

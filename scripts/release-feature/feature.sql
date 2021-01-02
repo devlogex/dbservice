@@ -6,7 +6,7 @@ CREATE TABLE "feature" (
   "release_id" bigint NOT NULL,
   "type" integer NOT NULL,
   "assign_to" bigint,
-  "initiatives" text,
+  "initiative_id" bigint,
   "goals" text,
   "epic_id" bigint,
   "start_on" bigint,
@@ -14,8 +14,8 @@ CREATE TABLE "feature" (
   "description" text,
   "files" text,
   "requirements" text,
-  "process" integer default 100,
-  "is_complete" integer default 1,
+  "process" integer default 0,
+  "is_complete" integer default 0,
   "created_at" bigint,
   "created_by" bigint
 );

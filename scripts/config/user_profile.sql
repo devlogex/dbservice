@@ -14,3 +14,16 @@ CREATE TABLE "user_profile" (
   "updated_at" bigint,
   "updated_by" bigint
 );
+
+INSERT INTO user_profile(id, email, password, role, first_name, last_name, company_name, domain, state)
+VALUES (
+  1,
+  'admin@gmail.com',
+  'admin',
+  'SYSTEM_ADMIN',
+  'admin',
+  'admin',
+  'admin',
+  'admin',
+  0
+);

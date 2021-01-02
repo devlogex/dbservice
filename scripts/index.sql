@@ -8,6 +8,23 @@ CREATE TABLE "package_code" (
   "updated_at" bigint,
   "updated_by" bigint,
   "state" int NOT NULL
+);CREATE TABLE "package" (
+  "id" bigint PRIMARY KEY,
+  "max_product" int NOT NULL,
+  "max_member" int NOT NULL,
+  "price" NUMERIC(19,4) NOT NULL,
+  "period_validity" bigint NOT NULL,
+  "name" VARCHAR(256),
+  "description" text,
+  "created_at" bigint,
+  "created_by" bigint,
+  "updated_at" bigint,
+  "updated_by" bigint,
+  "state" int NOT NULL
+);CREATE TABLE "permission" (
+  "id" bigint PRIMARY KEY,
+  "name" bigint UNIQUE NOT NULL,
+  "permissions" text NOT NULL
 );CREATE TABLE "product" (
   "id" bigint PRIMARY KEY,
   "name" varchar(256) NOT NULL,
@@ -45,22 +62,22 @@ CREATE TABLE "package_code" (
   "created_by" bigint,
   "updated_at" bigint,
   "updated_by" bigint
-);CREATE TABLE "workspace" (
-  "id" bigint PRIMARY KEY,
-  "state" int NOT NULL,
-  "config_id" bigint,
-  "owner_id" bigint NOT NULL,
-  "domain" varchar(256) NOT NULL UNIQUE,
-  "created_at" bigint,
-  "created_by" bigint,
-  "updated_at" bigint,
-  "updated_by" bigint
 );CREATE TABLE "workspace_config" (
   "id" bigint PRIMARY KEY,
   "workspace_id" bigint,
   "package_id" bigint,
   "config" text NOT NULL,
   "state" int NOT NULL,
+  "created_at" bigint,
+  "created_by" bigint,
+  "updated_at" bigint,
+  "updated_by" bigint
+);CREATE TABLE "workspace" (
+  "id" bigint PRIMARY KEY,
+  "state" int NOT NULL,
+  "config_id" bigint,
+  "owner_id" bigint NOT NULL,
+  "domain" varchar(256) NOT NULL UNIQUE,
   "created_at" bigint,
   "created_by" bigint,
   "updated_at" bigint,
@@ -82,6 +99,8 @@ CREATE TABLE "epic" (
   "product_id" bigint NOT NULL,
   "name" varchar(256) NOT NULL,
   "state" integer NOT NULL,
+  "start_on" bigint,
+  "end_on" bigint,
   "release_id" bigint NOT NULL,
   "assign_to" bigint,
   "initiatives" text,
@@ -98,7 +117,7 @@ CREATE TABLE "epic" (
   "release_id" bigint NOT NULL,
   "type" integer NOT NULL,
   "assign_to" bigint,
-  "initiatives" text,
+  "initiative_id" bigint,
   "goals" text,
   "epic_id" bigint,
   "start_on" bigint,
@@ -106,34 +125,15 @@ CREATE TABLE "epic" (
   "description" text,
   "files" text,
   "requirements" text,
-  "process" integer default 100,
-  "is_complete" integer default 1,
-  "created_at" bigint,
-  "created_by" bigint
-);CREATE TABLE "release" (
-  "id" bigint PRIMARY KEY,
-  "product_id" bigint NOT NULL,
-  "name" varchar(256) NOT NULL,
-  "state" integer NOT NULL,
-  "owner" bigint NOT NULL,
-  "initiatives" text,
-  "goals" text,
-  "days_to_release" integer DEFAULT 0,
-  "release_date" bigint,
-  "start_on" bigint,
-  "end_on" bigint,
-  "develop_start_on" bigint,
-  "process" integer default 100,
-  "pending_features" integer default 0,
-  "completed_features" integer default 0,
-  "theme" text,
-  "files" text,
+  "process" integer default 0,
+  "is_complete" integer default 0,
   "created_at" bigint,
   "created_by" bigint
 );CREATE TABLE "release_layout" (
   "id" bigint PRIMARY KEY,
-  "release_id" bigint UNIQUE,
+  "release_id" bigint,
   "product_id" bigint,
+  "type" varchar(64),
   "layout" text
 );CREATE TABLE "release_phase" (
   "id" bigint PRIMARY KEY,
@@ -144,6 +144,27 @@ CREATE TABLE "epic" (
   "date" varchar(64),
   "description" text,
   "files" text
+);CREATE TABLE "release" (
+  "id" bigint PRIMARY KEY,
+  "product_id" bigint NOT NULL,
+  "name" varchar(256) NOT NULL,
+  "state" integer NOT NULL,
+  "owner" bigint,
+  "initiatives" text,
+  "goals" text,
+  "days_to_release" integer DEFAULT 0,
+  "release_date" bigint,
+  "start_on" bigint,
+  "end_on" bigint,
+  "develop_start_on" bigint,
+  "process" integer default 0,
+  "pending_features" integer default 0,
+  "completed_features" integer default 0,
+  "theme" text,
+  "files" text,
+  "type" varchar(64),
+  "created_at" bigint,
+  "created_by" bigint
 );CREATE TABLE "requirement" (
   "id" bigint PRIMARY KEY,
   "feature_id" bigint NOT NULL,
@@ -152,6 +173,17 @@ CREATE TABLE "epic" (
   "assign_to" bigint,
   "description" text,
   "files" text,
+  "created_at" bigint,
+  "created_by" bigint
+);CREATE TABLE "user_story" (
+  "id" bigint PRIMARY KEY,
+  "product_id" bigint NOT NULL,
+  "name" varchar(256) NOT NULL,
+  "state" integer NOT NULL,
+  "steps" text,
+  "epics" text,
+  "releases" text,
+  "length" integer default 10,
   "created_at" bigint,
   "created_by" bigint
 );CREATE TABLE "history" (
@@ -186,6 +218,8 @@ CREATE TABLE "goal"
     "description" text NOT NULL DEFAULT '',
     "files" varchar(512) NOT NULL DEFAULT '',
     "parent_goal" text,
+    "initiatives" text default '[]',
+    "process" INTEGER default 0,
     "status" integer,
     "time_frame" varchar(64) NOT NULL DEFAULT '',
     "color" varchar(8) NOT NULL DEFAULT '#5DBF40',
@@ -201,6 +235,8 @@ CREATE TABLE "initiative"
     "description" text NOT NULL DEFAULT '',
     "files" varchar(512) NOT NULL DEFAULT '',
     "parent_initiative" text,
+    "goals" text default '[]',
+    "process" INTEGER default 0,
     "status" integer,
     "time_frame" varchar(64) NOT NULL DEFAULT '',
     "color" varchar(8) NOT NULL DEFAULT '#5DBF40',
@@ -214,6 +250,14 @@ CREATE TABLE "layout" (
   "type" varchar(64) NOT NULL,
   "layout" text NOT NULL DEFAULT ''
 );
+CREATE TABLE "model_component" (
+  "id" bigint PRIMARY KEY,
+  "name" varchar(64) NOT NULL DEFAULT 'Name...',
+  "model_id" bigint NOT NULL,
+  "color" varchar(8) NOT NULL DEFAULT 'f5f6fa',
+  "description" text NOT NULL DEFAULT 'Description...',
+  "files" text NOT NULL DEFAULT ''
+);
 CREATE TABLE "model" (
   "id" bigint PRIMARY KEY,
   "product_id" bigint NOT NULL,
@@ -222,14 +266,6 @@ CREATE TABLE "model" (
   "time_frame" varchar(64) NOT NULL DEFAULT '',
   "buz_type" varchar(64) NOT NULL DEFAULT 'Business',
   "description" text NOT NULL DEFAULT '',
-  "files" text NOT NULL DEFAULT ''
-);
-CREATE TABLE "model_component" (
-  "id" bigint PRIMARY KEY,
-  "name" varchar(64) NOT NULL DEFAULT 'Name...',
-  "model_id" bigint NOT NULL,
-  "color" varchar(8) NOT NULL DEFAULT 'f5f6fa',
-  "description" text NOT NULL DEFAULT 'Description...',
   "files" text NOT NULL DEFAULT ''
 );
 CREATE TABLE "personas"
@@ -241,15 +277,6 @@ CREATE TABLE "personas"
     "color" varchar(8) NOT NULL DEFAULT 'f5f6fa',
     "content" text
 );
-CREATE TABLE "position" (
-  "id" bigint PRIMARY KEY,
-  "product_id" bigint NOT NULL,
-  "name" varchar(128) NOT NULL DEFAULT 'Position Name',
-  "buz_type" varchar(64) NOT NULL DEFAULT 'Business',
-  "time_frame" varchar(64) NOT NULL DEFAULT '',
-  "description" text NOT NULL DEFAULT '',
-  "files" text NOT NULL DEFAULT ''
-);
 CREATE TABLE "position_component" (
   "id" bigint PRIMARY KEY,
   "name" varchar(64) NOT NULL DEFAULT 'Name...',
@@ -258,9 +285,12 @@ CREATE TABLE "position_component" (
   "description" text NOT NULL DEFAULT 'Description...',
   "files" text NOT NULL DEFAULT ''
 );
-CREATE TABLE "vision" (
+CREATE TABLE "position" (
   "id" bigint PRIMARY KEY,
-  "product_id" bigint NOT NULL UNIQUE,
+  "product_id" bigint NOT NULL,
+  "name" varchar(128) NOT NULL DEFAULT 'Position Name',
+  "buz_type" varchar(64) NOT NULL DEFAULT 'Business',
+  "time_frame" varchar(64) NOT NULL DEFAULT '',
   "description" text NOT NULL DEFAULT '',
   "files" text NOT NULL DEFAULT ''
 );
@@ -273,6 +303,12 @@ CREATE TABLE "vision_component" (
   "description" text NOT NULL DEFAULT 'Description...',
   "files" text NOT NULL DEFAULT ''
 );
+CREATE TABLE "vision" (
+  "id" bigint PRIMARY KEY,
+  "product_id" bigint NOT NULL UNIQUE,
+  "description" text NOT NULL DEFAULT '',
+  "files" text NOT NULL DEFAULT ''
+);
 CREATE TABLE "comment" (
   "id" bigint PRIMARY KEY,
   "belong_id" bigint NOT NULL,
@@ -281,6 +317,14 @@ CREATE TABLE "comment" (
   "files" text,
   "created_at" bigint,
   "created_by" bigint
+);CREATE TABLE "todo_assign" (
+  "id" bigint PRIMARY KEY,
+  "todo_id" bigint NOT NULL,
+  "user_id" bigint NOT NULL,
+  "workspace_id" bigint NOT NULL,
+  "type" integer NOT NULL,
+  "state" integer NOT NULL,
+  "verified_at" bigint
 );CREATE TABLE "todo" (
   "id" bigint PRIMARY KEY,
   "belong_id" bigint NOT NULL,
@@ -294,12 +338,4 @@ CREATE TABLE "comment" (
   "completed_at" bigint,
   "created_at" bigint NOT NULL,
   "created_by" bigint NOT NULL
-);CREATE TABLE "todo_assign" (
-  "id" bigint PRIMARY KEY,
-  "todo_id" bigint NOT NULL,
-  "user_id" bigint NOT NULL,
-  "workspace_id" bigint NOT NULL,
-  "type" integer NOT NULL,
-  "state" integer NOT NULL,
-  "verified_at" bigint
 );

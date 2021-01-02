@@ -3,7 +3,7 @@ CREATE TABLE "release" (
   "product_id" bigint NOT NULL,
   "name" varchar(256) NOT NULL,
   "state" integer NOT NULL,
-  "owner" bigint NOT NULL,
+  "owner" bigint,
   "initiatives" text,
   "goals" text,
   "days_to_release" integer DEFAULT 0,
@@ -11,11 +11,12 @@ CREATE TABLE "release" (
   "start_on" bigint,
   "end_on" bigint,
   "develop_start_on" bigint,
-  "process" integer default 100,
+  "process" integer default 0,
   "pending_features" integer default 0,
   "completed_features" integer default 0,
   "theme" text,
   "files" text,
+  "type" varchar(64),
   "created_at" bigint,
   "created_by" bigint
 );
