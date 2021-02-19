@@ -16,26 +16,26 @@ public class SDKTest {
     private Gson gson = new Gson();
     private DBServiceSdkClient client;
 
-    @Before
-    public void init() {
-        client = new DBServiceSdkClientImpl("localhost", 9000,1);
-    }
+    // @Before
+    // public void init() {
+    //     client = new DBServiceSdkClientImpl("localhost", 9000,1);
+    // }
 
-    @Test
-    public void select() {
-        String querySelect = "Select * from test";
-        BaseResponse<DBServiceResponse.QueryResult> response = client.selectSQL(querySelect);
-        LOGGER.info("response: {}", gson.toJson(response));
-    }
+    // @Test
+    // public void select() {
+    //     String querySelect = "Select * from test";
+    //     BaseResponse<DBServiceResponse.QueryResult> response = client.selectSQL(querySelect);
+    //     LOGGER.info("response: {}", gson.toJson(response));
+    // }
 
-    @Test
-    public void execute() {
-        int id = 1;
-        String name = "hixhix";
-        String queryExecute = String.format("insert into test values(%d,'%s')",id, name);
-        client.executeSQL(queryExecute);
-        String querySelect = String.format("Select * from test where id = %d",id);
-        BaseResponse<DBServiceResponse.QueryResult> response = client.selectSQL(querySelect);
-        LOGGER.info("response: {}", gson.toJson(response));
-    }
+    // @Test
+    // public void execute() {
+    //     int id = 1;
+    //     String name = "hixhix";
+    //     String queryExecute = String.format("insert into test values(%d,'%s')",id, name);
+    //     client.executeSQL(queryExecute);
+    //     String querySelect = String.format("Select * from test where id = %d",id);
+    //     BaseResponse<DBServiceResponse.QueryResult> response = client.selectSQL(querySelect);
+    //     LOGGER.info("response: {}", gson.toJson(response));
+    // }
 }
